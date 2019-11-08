@@ -1,0 +1,933 @@
+/*  --- Specification ---   */
+
+
+body {
+  font-size: 18px;
+  padding: 0;
+  letter-spacing: 0;
+  margin: 0;
+  font-family: Ubuntu;
+  overflow-x: hidden;
+}
+
+
+div,
+p,
+form,
+input,
+a,
+span,
+button {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+li {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+
+a,
+a:hover,
+a:active,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+input,
+input:hover,
+input:focus,
+input:active,
+button,
+button:hover,
+button:focus,
+button:active {
+  outline: none;
+}
+
+/*  --- Fonts ---   */
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/MyriadPro-Regular.eot');
+  src: local('../fonts/Myriad Pro Regular'), local('MyriadPro-Regular'),
+  url('../fonts/MyriadPro-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/MyriadPro-Regular.woff') format('woff'),
+  url('../fonts/MyriadPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*  --- Menu Gamburger ---  */
+
+#menu__toggle {
+  opacity: 0;
+
+  @media @tablet{
+    display: none;
+  }
+
+  &:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+
+  &:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  &:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+
+  &:checked ~ .menu__box {
+    visibility: visible;
+    right: 0;
+  }
+}
+
+.menu__btn {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 24px;
+  right: 69px;
+
+  cursor: pointer;
+  z-index: 10;
+  height: 22px;
+  width: 45px;
+
+  @media @tablet{
+    display: none;
+  }
+
+  & > span,
+  & > span::before,
+  & > span::after {
+    display: block;
+    position: absolute;
+
+    width: 45px;
+    height: 5px;
+    background-color: #f36b47;
+
+    transition-duration: .25s;
+  }
+
+  & > span::before {
+    content: '';
+    top: -8px;
+  }
+
+  & > span::after {
+    content: '';
+    top: 8px;
+  }
+}
+
+.menu__box {
+  display: block;
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  right: -100%;
+
+  width: 300px;
+  height: 100%;
+
+  margin: 0;
+  padding: 80px 0;
+
+  list-style: none;
+  background: rgba(236, 239, 241, .8);
+  box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+  transition-duration: .25s;
+  z-index: 5;
+
+  @media @tablet{
+    display: flex;
+    position: relative;
+    visibility: visible;
+    width: auto;
+    height: auto;
+    right: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: transparent;
+    box-shadow: none;
+    transition-duration: .25s;
+    z-index: 5;
+    margin-top: -5px;
+
+    & li{
+      padding: 0 18px;
+    }
+  }
+}
+
+.menu__item {
+  display: block;
+  padding: 12px 24px;
+
+  color: #333;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition-duration: .25s;
+
+  @media @tablet{
+    font-size: 15px;
+    display: inline-block;
+    padding: 0;
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+    transition-duration: .25s;
+    padding-bottom: 10px;
+    position: relative;
+  }
+
+
+  &:hover {
+    border-bottom: 2px solid #f36b47;
+  }
+
+  &:hover:after {
+    content: '';
+
+    @media @tablet{
+      position: absolute;
+      bottom: -11px;
+      left: calc(50% - 3px);
+      content: '';
+      color: red;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-top: 5px solid red;
+    }
+  }
+}
+
+/*  --- Header ---  */
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
+  position: relative;
+
+  @media @tablet{
+    padding-top: 30px;
+  }
+
+}
+
+nav{
+
+  @media @tablet{
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  @media @desktop{
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.logo {
+  color: #4c4c4b;
+  font-family: "Myriad Pro";
+  font-size: 72px;
+  font-weight: 400;
+
+  @media @tablet{
+    order: -1;
+    font-size: 36px;
+    margin-left: 48px;
+    margin-right: auto;
+  }
+  & span {
+    color: #f36b47;
+  }
+}
+
+.slider {
+  width: 100%;
+  margin-top: 40px;
+
+  @media @tablet{
+    margin-top: 27px;
+    height: 487px;
+  }
+
+  &__item {
+    height: 334px;
+    background: url("../img/img-00.jpg") center center no-repeat;
+    background-size: cover;
+
+    @media @tablet {
+      height: 487px;
+    }
+  }
+
+  &__text {
+    color: #eff7f8;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, .4);
+    margin-bottom: 11px;
+
+    @media @tablet{
+      font-size: 26px;
+    }
+  }
+
+  &__content {
+    margin: 0 auto;
+    height: 100%;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+  &__text:not(:first-child) {
+    color: #d8dbdb;
+    font-weight: 700;
+  }
+}
+
+.slick-arrow {
+  color: #f36b47;
+  opacity: .8;
+  font-size: 65px;
+  z-index: 4;
+  top: calc(50% - 15px);
+}
+
+.slick-arrow:hover {
+  opacity: .9;
+}
+
+.slick-prev {
+  left: 15px;
+}
+
+.slick-next {
+  right: 15px;
+}
+
+.slick-arrow::before {
+  display: none;
+}
+
+.meta {
+  background-color: #f36b47;
+  color: #fffffc;
+  font-size: 16px;
+  font-weight: 400;
+  width: 100%;
+
+  @media @tablet{
+    font-size: 24px;
+  }
+
+  & p {
+    margin: 29px auto 25px;
+    text-align: center;
+  }
+
+  & a,
+  & a:link,
+  & a:visited {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid #fffffc;
+    color: #fffffc;
+    transition: all .3s ease;
+
+    @media @tablet{
+      font-size: 20px;
+    }
+  }
+
+  & a:hover {
+    border-bottom: transparent;
+  }
+}
+
+.offer {
+  text-align: center;
+  margin-top: 47px;
+  padding-bottom: 20px;
+  border-bottom: 8px solid #f36b47;
+
+  &__title {
+    color: #484848;
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  &__title::after {
+    content: '';
+    display: block;
+    width: 94px;
+    height: 2px;
+    background-color: #f27554;
+    margin: 2px auto;
+  }
+
+  &__text {
+    padding: 0 30px;
+    color: #9d9c9c;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0;
+    margin-top: 20px;
+
+    @media @desktop{
+      font-size: 16px;
+      max-width: 1120px;
+    }
+  }
+}
+
+/* Section Features */
+
+.features {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 8px solid #f36b47;
+  padding-bottom: 48px;
+
+  @media @tablet{
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  @media @desktop{
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__box {
+    max-width: 306px;
+    margin-top: 49px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    @media @desktop{
+      max-width: 222px;
+    }
+  }
+
+  &__icon {
+    width: 30px;
+    height: 24px;
+    color: #f36b47;
+    font-size: 30px;
+  }
+
+  &__title {
+    color: #2e2e2e;
+    font-family: "Myriad Pro";
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 22px;
+
+    @media @desktop{
+      font-size: 20px;
+    }
+  }
+
+  &__text {
+    color: #9d9c9c;
+    font-family: Ubuntu;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4em;
+    margin-top: 14px;
+
+    @media @desktop{
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+}
+
+/* Section Portfolio */
+
+.portfolio {
+  padding: 82px 0 115px;
+
+  @media @desktop{
+    padding-top: 12px;
+  }
+
+  &__title {
+    color: #484848;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__title::after {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 189px;
+    height: 2px;
+    background-color: #f27554;
+  }
+
+  &__subtitle {
+    color: #9d9c9c;
+    font-family: "Myriad Pro";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    padding: 0 20px 0;
+    text-align: center;
+    margin: 26px auto 19px;
+
+    @media @desktop{
+      max-width: 675px;
+      font-size: 16px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media @mobile {
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    @media @tablet{
+      justify-content: center;
+    }
+
+    @media @desktop{
+      max-width: 1170px;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: space-evenly;
+    }
+  }
+
+  &__item {
+    margin-top: 61px;
+    max-width: 250px;
+    width: 100%;
+
+    @media @tablet{
+      max-width: 35%;
+
+      &:nth-child(odd) {
+        margin-right: 80px;
+      }
+    }
+
+    @media @desktop{
+      &{
+        max-width: 250px;
+      }
+
+      &:nth-child(odd) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__img {
+    height: 165px;
+    clip-path: inset(0 0 0 0);
+    position: relative;
+  }
+
+  &__img img:hover {
+    transform: scale(1.08);
+  }
+
+  &__img img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    transition: all .3s ease;
+  }
+
+
+  &__content {
+    border: 1px solid #e0dddd;
+    background-color: #eeeeee;
+    line-height: 18px;
+    padding: 4px 10px 8px 8px;
+    text-align: center;
+  }
+
+  &__subject {
+    color: #fe5c32;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__subject::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #d5d4d3;
+    margin: 2px auto 6px;
+  }
+
+  &__desc {
+    color: #605f5f;
+    font-weight: 400;
+  }
+}
+
+.talk {
+  background: #7a7a7a;
+  padding: 89px 5% 84px;
+
+  &__title {
+    font-size: 60px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  &__title span {
+    color: #f36b47;
+  }
+
+  &__text {
+    color: #ffffff;
+    font-family: "Myriad Pro";
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    margin-top: 57px;
+
+    @media @desktop{
+      font-size: 16px;
+      max-width: 926px;
+      margin: 57px auto 0;
+    }
+  }
+}
+
+/*  --- Section Contacts ---     */
+
+.contact {
+  padding: 66px 0 150px;
+
+  &__wrapper{
+    @media @desktop{
+      display: flex;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+  }
+
+  &__title {
+    color: #484848;
+    font-size: 48px;
+    font-weight: 500;
+    text-align: center;
+
+    @media @desktop{
+      font-size: 26px;
+    }
+  }
+
+  &__title::after {
+    content: '';
+    display: block;
+    width: 215px;
+    height: 2px;
+    background-color: #f27554;
+    margin: 0 auto;
+
+    @media @desktop{
+      width: 135px;
+    }
+  }
+
+  &__desc {
+    color: #9d9c9c;
+    font-family: Ubuntu;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    margin: 60px auto 113px;
+    padding: 0 23px;
+
+    @media @desktop{
+      font-size: 16px;
+      max-width: 1150px;
+    }
+  }
+}
+
+.map {
+  height: 520px;
+  width: 100%;
+  max-width: 568px;
+  margin: 0 auto;
+
+  @media @desktop{
+    margin: 0;
+  }
+}
+
+.details {
+
+  &__icon{
+    margin-right: 25px;
+
+    @media @desktop{
+      font-size: 18px;
+    }
+  }
+
+  &__title {
+    color: #484848;
+    font-size: 48px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 84px;
+
+    @media @desktop{
+      font-size: 20px;
+      text-align: left;
+      margin: 0 0 31px 25px;
+    }
+  }
+
+  &__title::after {
+    content: '';
+    display: block;
+    width: 215px;
+    height: 2px;
+    background-color: #f27554;
+    margin: 0 auto;
+    margin-bottom: 86px;
+
+    @media @desktop{
+      content: none;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media @tablet{
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      width: 80%;
+      margin: auto;
+    }
+
+    @media @desktop{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: auto;
+      margin-left: 73px;
+    }
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    margin-bottom: 52px;
+
+    @media @desktop{
+      margin-bottom: 24px;
+    }
+  }
+
+  &__contact:last-child {
+    margin-bottom: 27px;
+  }
+
+  &__icon {
+    color: #f27554;
+    font-size: 27px;
+    margin-right: 44px;
+
+    @media @tablet{
+      margin-right: 25px;
+    }
+  }
+
+  &__contact span {
+    color: #9d9c9c;
+    font-size: 26px;
+    font-weight: 400;
+    max-width: 246px;
+
+    @media @tablet{
+      font-size: 16px;
+    }
+  }
+
+  &__adds {
+    line-height: 25px;
+
+    @media @tablet{
+      flex-basis: 100%;
+      order: -1;
+      justify-content: center;
+    }
+
+    @media @desktop{
+      order: 0;
+    }
+  }
+}
+
+.form {
+  margin: 0 11px 0 21px;
+
+  @media @tablet{
+    max-width: 530px;
+    margin: auto;
+  }
+
+  @media @desktop{
+    margin-left: 73px;
+  }
+  &__input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #cac6c6;
+    background-color: #f0f0f0;
+    padding-left: 16px;
+    color: #9d9c9c;
+    font-size: 16px;
+    margin-bottom: 9px;
+
+    @media @desktop{
+      max-width: 330px;
+    }
+  }
+
+  &__massage {
+    width: 100%;
+    height: 169px;
+    border: 1px solid #cac6c6;
+    background-color: #f0f0f0;
+    padding: 20px 0px 0 16px;
+    box-sizing: border-box;
+  }
+
+  &__submit {
+    width: 313px;
+    height: 44px;
+    background-color: #f27554;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Myriad Pro";
+    font-size: 20px;
+    line-height: 44px;
+    display: block;
+    border: 0;
+    margin: 23px auto 0;
+    transition: all .3s ease;
+
+    @media @tablet{
+      width: 75%;
+    }
+
+    @media @desktop{
+      max-width: 130px;
+      margin-left: 0;
+    }
+  }
+
+  &__submit:hover {
+    transform: scale(1.03);
+  }
+
+  &__submit:active {
+    transform: scale(1);
+  }
+}
+
+/* Section Footer */
+
+.footer {
+  background-color: #f37b5c;
+  padding: 20px 0 16px;
+  margin-bottom: 60px;
+}
+
+.copy {
+  color: #fff;
+  font-family: "Myriad Pro";
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* --- Media Quearis */
+
+@media @desktop {
+  .border-none {
+    border-bottom: none;
+  }
+}

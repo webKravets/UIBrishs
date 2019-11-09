@@ -38,11 +38,9 @@ module.exports = function (grunt) {
       },
       target: {
         files: {
-          'pub/css/main.css': [
-            'assets/dist/plagins/slick/slick.css',
-            'assets/dist/plagins/slick/slick-theme.css',
-            'assets/dist/css/style-processed.css'
-          ]
+          'pub/css/main.css': 'assets/dist/css/style-processed.css',
+          'pub/plagins/slick/slick.css': 'assets/dist/plagins/slick/slick.css',
+          'pub/plagins/slick/slick-theme.css': 'assets/dist/plagins/slick/slick-theme.css',
         }
       }
     },
@@ -126,5 +124,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('default', ['less:prod', 'postcss:prod', 'cssmin', 'imagemin', 'concat']);
-  grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'imagemin', 'watch'])
+  grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'imagemin', 'concat', 'watch'])
 };
